@@ -80,11 +80,12 @@ public class MainActivity extends AppCompatActivity {
                 Button b = (Button) v;
                 String operation = b.getText().toString();
                 String value = newNumber.getText().toString();
-                Double doubleValue = Double.valueOf(value);
                 try{
+                    Double doubleValue = Double.valueOf(value);
                     performOperation(doubleValue, operation);
                 } catch (NumberFormatException e){
-                    divisionByZero();
+                    newNumber.setText("");
+                    message.setText("You can not divide by zero");
                 }
                 pendingOperation = operation;
                 displayOperation.setText(operation);
@@ -97,7 +98,26 @@ public class MainActivity extends AppCompatActivity {
         buttonPlus.setOnClickListener(operationListener);
 
 
+
+        buttonSign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String value = newNumber.getText().toString();
+                if(value.length() == 0){
+                    newNumber.setText("-");
+                } else {
+                    try{
+                        Double doubleValue = Double.valueOf(value);
+                        doubleValue *= -1;
+                        newNumber.setText(doubleValue.toString());
+                    } catch (NumberFormatException e){
+                        newNumber.setText("");
+                    }
+                }
+            }
+        });
     }
+
 
 
     @Override
@@ -132,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case "/":
                     if(value == 0) {
-                        divisionByZero();
+                        message.setText("You can not divide by zero");
                     } else {
                         operand1 /= value;
                     }
@@ -148,17 +168,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
             }
+            result.setText(operand1.toString());
+            newNumber.setText("");
         }
-
-        result.setText(operand1.toString());
-        newNumber.setText("");
     }
 
-    public void divisionByZero(){
-        displayOperation.setText("");
-        result.setText("");
-        newNumber.setText("");
-        message.setText("You can not divide by zero");
-
-    }
 }
