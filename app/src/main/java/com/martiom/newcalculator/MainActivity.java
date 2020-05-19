@@ -1,13 +1,14 @@
 package com.martiom.newcalculator;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
     private EditText result;
@@ -15,13 +16,14 @@ public class MainActivity extends AppCompatActivity {
     private TextView displayOperation;
     private TextView message;
 
-    // varibles for operations and operands
-
+    // Variables to hold the operands and type of calculations
     private Double operand1 = null;
-    private String pendingOperation = "";
+    private String pendingOperation = "=";
 
     private static final String STATE_PENDING_OPERATION = "PendingOperation";
     private static final String STATE_OPERAND1 = "Operand1";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,25 +46,19 @@ public class MainActivity extends AppCompatActivity {
         Button button8 = (Button) findViewById(R.id.button8);
         Button button9 = (Button) findViewById(R.id.button9);
         Button buttonDot = (Button) findViewById(R.id.buttonDot);
-        Button buttonSign = (Button) findViewById(R.id.buttonSign);
-        Button buttonC = (Button) findViewById(R.id.buttonC);
 
-
-        Button buttonDivide = (Button) findViewById(R.id.buttonDivide);
-        Button buttonPlus = (Button) findViewById(R.id.buttonPlus);
-        Button buttonMinus = (Button) findViewById(R.id.buttonMinus);
-        Button buttonMultiply = (Button) findViewById(R.id.buttonMultiply);
         Button buttonEquals = (Button) findViewById(R.id.buttonEquals);
-
+        Button buttonDivide = (Button) findViewById(R.id.buttonDivide);
+        Button buttonMultiply = (Button) findViewById(R.id.buttonMultiply);
+        Button buttonMinus = (Button) findViewById(R.id.buttonMinus);
+        Button buttonPlus = (Button) findViewById(R.id.buttonPlus);
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Button b = (Button) v;
+            public void onClick(View view) {
+                Button b = (Button) view;
                 newNumber.append(b.getText().toString());
             }
         };
-
-
         button0.setOnClickListener(listener);
         button1.setOnClickListener(listener);
         button2.setOnClickListener(listener);
@@ -75,95 +71,94 @@ public class MainActivity extends AppCompatActivity {
         button9.setOnClickListener(listener);
         buttonDot.setOnClickListener(listener);
 
-        final View.OnClickListener operationListener = new View.OnClickListener() {
+        View.OnClickListener opListener = new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Button b = (Button) v;
-                String operation = b.getText().toString();
+            public void onClick(View view) {
+                Button b = (Button) view;
+                String op = b.getText().toString();
                 String value = newNumber.getText().toString();
-                try{
+                try {
                     Double doubleValue = Double.valueOf(value);
-                    performOperation(doubleValue, operation);
-                } catch (NumberFormatException e){
+                    performOperation(doubleValue, op);
+                } catch (NumberFormatException e) {
                     newNumber.setText("");
-                    message.setText("You can not divide by zero");
                 }
-                pendingOperation = operation;
-                displayOperation.setText(operation);
+                pendingOperation = op;
+                displayOperation.setText(pendingOperation);
             }
         };
-        buttonEquals.setOnClickListener(operationListener);
-        buttonDivide.setOnClickListener(operationListener);
-        buttonMultiply.setOnClickListener(operationListener);
-        buttonMinus.setOnClickListener(operationListener);
-        buttonPlus.setOnClickListener(operationListener);
 
+        buttonEquals.setOnClickListener(opListener);
+        buttonDivide.setOnClickListener(opListener);
+        buttonMultiply.setOnClickListener(opListener);
+        buttonMinus.setOnClickListener(opListener);
+        buttonPlus.setOnClickListener(opListener);
 
+        Button buttonSign = (Button) findViewById(R.id.buttonSign);
+        Button buttonC = (Button) findViewById(R.id.buttonC);
 
         buttonSign.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 String value = newNumber.getText().toString();
-                if(value.length() == 0){
-                    newNumber.setText("-");
+                if(value.length() == 0) {
+                    newNumber.setText("-1.0");
                 } else {
-                    try{
+                    try {
                         Double doubleValue = Double.valueOf(value);
                         doubleValue *= -1;
                         newNumber.setText(doubleValue.toString());
-                    } catch (NumberFormatException e){
+                    } catch(NumberFormatException e) {
                         newNumber.setText("");
+                        message.setText("Division by zero!");
                     }
                 }
+
             }
         });
 
         buttonC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                newNumber.setText("");
-                result.setText("");
-                displayOperation.setText("");
-                message.setText("");
+                clearButton();
             }
         });
+
+
     }
 
-
-
     @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
+    protected void onSaveInstanceState(Bundle outState) {
         outState.putString(STATE_PENDING_OPERATION, pendingOperation);
-        if(operand1 != null){
+        if (operand1 != null) {
             outState.putDouble(STATE_OPERAND1, operand1);
         }
         super.onSaveInstanceState(outState);
     }
 
     @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         pendingOperation = savedInstanceState.getString(STATE_PENDING_OPERATION);
         operand1 = savedInstanceState.getDouble(STATE_OPERAND1);
         displayOperation.setText(pendingOperation);
     }
 
-    private void performOperation (Double value, String operation){
-        displayOperation.setText(operation);
-        if(null == operand1){
+    private void performOperation(Double value, String operation) {
+        if (null == operand1) {
             operand1 = value;
         } else {
-
-            if (pendingOperation == "=") {
+            if (pendingOperation.equals("=")) {
                 pendingOperation = operation;
             }
-            switch (pendingOperation){
+            switch (pendingOperation) {
                 case "=":
                     operand1 = value;
                     break;
                 case "/":
-                    if(value == 0) {
-                        message.setText("You can not divide by zero");
+                    if (value == 0) {
+                        operand1 = 0.0;
+
                     } else {
                         operand1 /= value;
                     }
@@ -171,17 +166,26 @@ public class MainActivity extends AppCompatActivity {
                 case "*":
                     operand1 *= value;
                     break;
-                case "+":
-                    operand1 += value;
-                    break;
                 case "-":
                     operand1 -= value;
                     break;
-
+                case "+":
+                    operand1 += value;
+                    break;
             }
-            result.setText(operand1.toString());
-            newNumber.setText("");
         }
+
+        result.setText(operand1.toString());
+        message.setText("");
+        newNumber.setText("");
     }
 
+    private void clearButton(){
+        operand1 = 0.0;
+        result.setText("");
+        message.setText("");
+        newNumber.setText("");
+        displayOperation.setText("");
+    }
 }
+
