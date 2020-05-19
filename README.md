@@ -20,4 +20,4 @@ But found a double click operation crashing BUG.
 8. Design changes.
 9. Code review/refactor/rearange.
 10. Test.
-(Test includes bugfix)
+*(Test includes bugfix)*
