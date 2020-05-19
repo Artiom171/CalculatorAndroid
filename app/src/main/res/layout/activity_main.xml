@@ -232,4 +232,16 @@
         app:layout_constraintEnd_toStartOf="@+id/buttonDot"
         app:layout_constraintTop_toBottomOf="@+id/button0" />
 
+    <Button
+        android:id="@+id/buttonC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:minWidth="48dp"
+        android:text="C"
+        app:layout_constraintBaseline_toBaselineOf="@id/buttonSign"
+        app:layout_constraintStart_toEndOf="@+id/buttonSign"
+        app:layout_constraintTop_toBottomOf="@+id/buttonDot" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -212,4 +212,14 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.500684" />
 
+    <Button
+        android:id="@+id/buttonSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:minWidth="48dp"
+        android:text="+/-"
+        app:layout_constraintBaseline_toBaselineOf="@id/buttonDivide"
+        app:layout_constraintStart_toEndOf="@+id/buttonDivide" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         Button button9 = (Button) findViewById(R.id.button9);
         Button buttonDot = (Button) findViewById(R.id.buttonDot);
         Button buttonSign = (Button) findViewById(R.id.buttonSign);
+        Button buttonC = (Button) findViewById(R.id.buttonC);
 
 
         Button buttonDivide = (Button) findViewById(R.id.buttonDivide);
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         button9.setOnClickListener(listener);
         buttonDot.setOnClickListener(listener);
 
-        View.OnClickListener operationListener = new View.OnClickListener() {
+        final View.OnClickListener operationListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Button b = (Button) v;
@@ -114,6 +115,16 @@ public class MainActivity extends AppCompatActivity {
                         newNumber.setText("");
                     }
                 }
+            }
+        });
+
+        buttonC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newNumber.setText("");
+                result.setText("");
+                displayOperation.setText("");
+                message.setText("");
             }
         });
     }
