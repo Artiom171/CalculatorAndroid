@@ -1,11 +1,12 @@
 # CalculatorAndroid
 Calculator App for Android
 
-Calculator App v1.0
+Calculator App v1.01
 
 ## Done
 Basic calculator.
-
+Division by zero exception handled.
+But found a double click operation crashing BUG.
 
 
 ## To be done...
