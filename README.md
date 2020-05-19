@@ -3,12 +3,12 @@ Calculator App for Android
 
 Calculator App v1.0
 
-#Done
+## Done
 Basic calculator.
 
 
 
-#To be done...
+## To be done...
 1. Negative button
 2. Clear button
 3. Save state after rotate
