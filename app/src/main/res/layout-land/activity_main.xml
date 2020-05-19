@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:minWidth="48dp"
     tools:context=".MainActivity">
 
     <EditText
@@ -221,5 +222,41 @@
         android:text="+/-"
         app:layout_constraintBaseline_toBaselineOf="@id/buttonDivide"
         app:layout_constraintStart_toEndOf="@+id/buttonDivide" />
+
+    <Button
+        android:id="@+id/buttonC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:minWidth="48dp"
+        android:text="C"
+        app:layout_constraintBaseline_toBaselineOf="@id/buttonMultiply"
+        app:layout_constraintStart_toEndOf="@+id/buttonMultiply"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSign" />
+
+    <Button
+        android:id="@+id/buttonSquareRoot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:minWidth="48dp"
+        android:text="√"
+        app:layout_constraintBaseline_toBaselineOf="@id/buttonMinus"
+        app:layout_constraintStart_toEndOf="@+id/buttonMinus"
+        app:layout_constraintTop_toBottomOf="@+id/buttonC" />
+
+    <Button
+        android:id="@+id/buttonSquare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:minWidth="48dp"
+        android:text="^2"
+        app:layout_constraintBaseline_toBaselineOf="@id/buttonPlus"
+        app:layout_constraintStart_toEndOf="@+id/buttonPlus"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSquareRoot" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

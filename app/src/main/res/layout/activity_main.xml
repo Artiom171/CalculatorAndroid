@@ -244,4 +244,26 @@
         app:layout_constraintStart_toEndOf="@+id/buttonSign"
         app:layout_constraintTop_toBottomOf="@+id/buttonDot" />
 
+    <Button
+        android:id="@+id/buttonSquareRoot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:minWidth="48dp"
+        android:text="√"
+        app:layout_constraintStart_toEndOf="@+id/buttonC"
+        app:layout_constraintTop_toBottomOf="@+id/buttonEquals" />
+
+    <Button
+        android:id="@+id/buttonSquare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:minWidth="48dp"
+        android:text="^2"
+        app:layout_constraintStart_toEndOf="@+id/buttonSquareRoot"
+        app:layout_constraintTop_toBottomOf="@+id/buttonPlus" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

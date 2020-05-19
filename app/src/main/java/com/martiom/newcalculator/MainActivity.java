@@ -8,8 +8,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.w3c.dom.Text;
-
 public class MainActivity extends AppCompatActivity {
     private EditText result;
     private EditText newNumber;
@@ -52,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
         Button buttonMultiply = (Button) findViewById(R.id.buttonMultiply);
         Button buttonMinus = (Button) findViewById(R.id.buttonMinus);
         Button buttonPlus = (Button) findViewById(R.id.buttonPlus);
+        Button buttonSquareRoot = (Button) findViewById(R.id.buttonSquareRoot);
+        Button buttonSquare = (Button) findViewById(R.id.buttonSquare);
+
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,6 +115,41 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
+            }
+        });
+
+        buttonSquareRoot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String value = newNumber.getText().toString();
+                try{
+                    Double doubleValue = Double.valueOf(value);
+                    doubleValue = Math.sqrt(doubleValue);
+                    result.setText(doubleValue.toString());
+                    newNumber.setText("");
+                    displayOperation.setText("√");
+                    message.setText("");
+                } catch (NumberFormatException e){
+                    result.setText("0.0");
+                    message.setText("Empty number considered as 0");
+                }
+            }
+        });
+        buttonSquare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String value = newNumber.getText().toString();
+                try{
+                    Double doubleValue = Double.valueOf(value);
+                    doubleValue = doubleValue * doubleValue;
+                    result.setText(doubleValue.toString());
+                    newNumber.setText("");
+                    displayOperation.setText("^2");
+                    message.setText("");
+                } catch (NumberFormatException e){
+                    result.setText("0.0");
+                    message.setText("Empty number considered as 0");
+                }
             }
         });
 
