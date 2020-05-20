@@ -7,13 +7,17 @@ Calculator App v1.01
 Basic calculator.
 Division by zero exception handled.
 But found a double click operation crashing BUG.
-1. Test. Bugfix
-2. Negative button.
+Test. Bugfix
+Negative button.
+Test.
+Save state after rotate.
+Test.
+Clear button.
+Root button.
+Square root button.
 
 
 ## To be done...
-3. Test.
-4. Clear button.
 5. Test.
 6. Save state after rotate.
 7. Test.
