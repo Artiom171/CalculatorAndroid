@@ -58,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Button b = (Button) view;
                 newNumber.append(b.getText().toString());
+                if(newNumber.getText().toString().equals(".")){
+                    newNumber.setText("0.");
+                }
             }
         };
         button0.setOnClickListener(listener);
@@ -81,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     Double doubleValue = Double.valueOf(value);
                     performOperation(doubleValue, op);
+
                 } catch (NumberFormatException e) {
                     newNumber.setText("");
                 }
@@ -103,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String value = newNumber.getText().toString();
                 if(value.length() == 0) {
-                    newNumber.setText("-1.0");
+                    newNumber.setText("-");
                 } else {
                     try {
                         Double doubleValue = Double.valueOf(value);
@@ -193,8 +197,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case "/":
                     if (value == 0) {
-                        operand1 = 0.0;
-
+                        //operand1 = 0.0;
+                        clearButton();
+                        message.setText("Division by zero!");
                     } else {
                         operand1 /= value;
                     }
